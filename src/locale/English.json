@@ -3,6 +3,8 @@
     "HEADER": {
       "tool": "A tool of the ecosystem from",
       "logo_alt": "AccessMonitor - a web accessibility evaluator",
+      "header_arial_label": "AccessMonitor page header",
+      "logo_title": "go to the AccessMonitor homepage",
       "NAV": {
         "location": "You are in",
         "ecosystem": "Ecosystem",
@@ -52,12 +54,17 @@
           "link3": "Candidacy",
           "link4": "Declaration of accessibility and usability",
           "link5": "Badge requirements"
-        }
+        },
+          "youarehere": "you are here",
+          "open_dropdown": "press to compress our list of applications and websites",
+          "close_dropdown": "press to expand our list of applications and websites"
       }
     },
     "HOME_PAGE": {
       "header": "Get an accessibility report using one of the following methods",
-      "intro_text": "Access our web accessibility practices (WCAG 2.1) assessor here. Obtain an accessibility report using one of the following methods:",
+      "intro_text": "Is your website accessible?",
+      "intro_text_content": "Obtain an accessibility report using one of the following methods:",
+
       "intro_img_text": "check image",
       "tabs": {
         "url": "Insert URL",
@@ -70,12 +77,14 @@
       "html_label": "Insert the HTML code down below",
       "html_placeholder": "Insert HTML code here",
       "file_label": "Select file",
+      "file_title": "Select an HTML file",
       "file_name_label": "File name",
       "file_type_error": "Invalid file type",
       "submit": "Evaluate",
       "messages": {
         "invalid_url": "The given url is invalid or does not exist"
-      }
+      },
+      "main_aria": "main body of the AccessMonitor page"
     },
     "RESULTS": {
       "title": "Web accessibility practices report (W3C WCAG 2.1)",
@@ -83,7 +92,7 @@
       "actions": {
         "back": "Go back",
         "re_evaluate": "Re-evaluate page",
-        "download": "Download data",
+        "download": "Download data in CSV",
         "see_page": "See page",
         "pagecode": "See page code",
         "open_webpage": "Open webpage"
@@ -108,6 +117,9 @@
             "err": "Non Acceptable",
             "warn": "To view manually"
           }
+        },
+        "gauge": {
+          "title": "AccessMonitor score. Page rating: {{value}} out of 10"
         }
       },
       "results": {
@@ -137,7 +149,12 @@
         "alt_failed":"Non acceptable practice",
         "alt_warning":"Practice to view manually",
         "alt_information":"press for more information",
-        "alt_more_information":"press for less information"
+        "alt_more_information":"press for less information",
+        "image_title": {
+          "AMA-Check-Line": "Acceptable practice",
+          "AMA-Wrong-Line": "Non acceptable practice",
+          "AMA-Middle-Line": "Practice to view manually"
+        }
       },
       "scoreboard": {
         "level": "Level",
@@ -146,7 +163,7 @@
       }
     },
     "ELEMENT_RESULTS": {
-      "subtitle": "Test results",
+      "subtitle": "Test details",
       "elements_tab": "Elements",
       "page_tab": "Page",
       "total_elements": "elements found",
@@ -163,7 +180,10 @@
         "line": "Line:",
         "location": "Location:",
         "property": "Property:",
-        "value": "Value:"
+        "value": "Value:",
+        "caption": "Occurrences of this practice",
+        "ocurrenceNumber": "Occurrence Nº",
+        "ocurrenceDetail": "Details of the occurrence"
       }
     },
     "CODE": {
@@ -186,8 +206,8 @@
       "privacy": "Privacy policy",
       "options": "Visualization options",
       "glossary": "Glossary",
-      "link": "Administrative Modernization Agency",
-      "rights": "All rights reserved."
+      "link": "Administrative Modernization Agency.",
+      "rights": " All rights reserved."
     },
     "LANGUAGES": {
       "Portuguese": "Português",

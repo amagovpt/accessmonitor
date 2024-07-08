@@ -3,20 +3,26 @@ import PropTypes from "prop-types";
 import { Breadcrumb as BBreadcrumb } from "react-bootstrap";
 
 import "./styles.css";
+import { useTranslation } from "react-i18next";
 
 const { Item } = BBreadcrumb;
 
 const Breadcrumb = ({ data, onClick, ...props }) => {
+  const { t } = useTranslation();
+
   const size = data.length - 1;
   const handleOnClick = (item) => (e) => {
-    onClick(item, e);
+    if (item.href === "") {
+      e.preventDefault();
+      onClick(item, e);
+    }
   };
   return (
-    <BBreadcrumb {...props}>
+    <BBreadcrumb {...props} aria-label={t("HEADER.DROPDOWN.youarehere")}>
       {data.map((item, index) => (
         <Item
           key={`id-${index}`}
-          href={item.href}
+          href={item.href === "" ? "" : item.href}
           active={index === size}
           onClick={handleOnClick(item)}
         >

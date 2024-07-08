@@ -70,3 +70,34 @@
 .right {
   justify-content: flex-end;
 }
+
+.html_code {
+  padding: 15px;
+  overflow: scroll;
+  margin-bottom: 100px;
+}
+
+.html_code pre {
+  display: block !important;
+  font-size: 87.5%;
+  color: #212529;
+  word-wrap: break-word;
+}
+
+/* Dark mode */
+
+.dark_mode-code .report_container_title,
+.dark_mode-code .report_container_subtitle,
+.dark_mode-code .sumary_container h2,
+.dark_mode-code .sumary_container .size_container span {
+  color: #ebf2f6 !important;
+}
+
+.dark_mode-code .html_code {
+  background-color: #2c3241 !important;
+  color: #ebf2f6 !important;
+}
+
+.dark_mode-code .html_code pre {
+  color: #ebf2f6 !important;
+}

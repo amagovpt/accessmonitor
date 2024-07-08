@@ -2,15 +2,15 @@
 import { Icon } from "../../index";
 import { Accordion } from "../../Atoms/Accordion";
 import { optionForAccordion } from "../../../pages/Resume/utils";
+
 import "./styles.css";
 
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-import { useTranslation } from "react-i18next"
-
-const TableComponent = ({ data, allData, setAllData, setEle }) => {
+const TableComponent = ({ data, allData, setAllData }) => {
   const navigate = useNavigate();
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   if (!data || !data.results) {
     return;
@@ -18,8 +18,15 @@ const TableComponent = ({ data, allData, setAllData, setEle }) => {
 
   function setAllDataResult(ele) {
     setAllData(allData);
-    setEle(ele);
-    navigate("/detalhe");
+    const type = allData.rawUrl;
+
+    if (type === "") {
+      const content = "html";
+      navigate(`/amp/results/${content}/${ele}`);
+    } else {
+      const encodedURL = encodeURIComponent(allData?.rawUrl);
+      navigate(`/amp/results/${encodedURL}/${ele}`);
+    }
   }
 
   const optionsArray = optionForAccordion(t, data);
@@ -27,15 +34,16 @@ const TableComponent = ({ data, allData, setAllData, setEle }) => {
   return (
     <>
       <table className="table table_primary">
-        <caption className="visually-hidden">{t("RESULTS.summary.table.title")}</caption>
+        <caption className="visually-hidden">
+          {t("RESULTS.results.caption")}
+        </caption>
         <thead>
           <tr>
-            <th>
-              <span className="visually-hidden">#</span>
-            </th>
-            <th>{t("RESULTS.results.practice")}</th>
+            <th colSpan="2">{t("RESULTS.results.practice")}</th>
             <th className="hide-on-small-screen">{t("RESULTS.results.lvl")}</th>
-            <th className="hide-on-small-screen">{t("RESULTS.results.details")}</th>
+            <th className="hide-on-small-screen">
+              {t("RESULTS.results.details")}
+            </th>
           </tr>
         </thead>
 
@@ -43,21 +51,27 @@ const TableComponent = ({ data, allData, setAllData, setEle }) => {
           {optionsArray.map((option) => (
             <tr key={option.id}>
               <td className={option?.tdClassName}>
+                <span className="visually-hidden">
+                  {t(`RESULTS.results.image_title.${option.iconName}`)}
+                </span>
                 <Icon name={option.iconName} />
               </td>
               <td className="mobile-options">
-                <Accordion options={[option]} flush={true} />
+                <Accordion options={[option]} flush={true} id={option.id} />
 
                 <div className="hide_desktop-screen">
-                  <span>{t("RESULTS.results.lvl")}: {option?.lvl}</span>
+                  <span className="info_level">
+                    {t("RESULTS.results.lvl")}: {option?.lvl}
+                  </span>
 
                   {option.ele && (
                     <button
                       onClick={() => setAllDataResult(option.ele)}
                       className="detail_link"
+                      aria-label={t("RESULTS.results.details")}
+                      aria-describedby={option.id}
                     >
                       <Icon name="AMA-Detalhe-Line" />
-                      <span className="visually-hidden">{t("RESULTS.results.details")}</span>
                     </button>
                   )}
                 </div>
@@ -70,9 +84,10 @@ const TableComponent = ({ data, allData, setAllData, setEle }) => {
                 <button
                   onClick={() => setAllDataResult(option.ele && option.ele)}
                   className="detail_link"
+                  aria-label={t("RESULTS.results.details")}
+                  aria-describedby={option.id}
                 >
                   <Icon name="AMA-Detalhe-Line" />
-                  <span className="visually-hidden">{t("RESULTS.results.details")}</span>
                 </button>
               </td>
             </tr>

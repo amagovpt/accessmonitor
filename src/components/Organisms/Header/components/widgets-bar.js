@@ -3,10 +3,11 @@ import { ThemeContext } from "../../../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../index";
+import { useLocation } from "react-router-dom";
 
 export function WidgetBar({ description, logo }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  const location = useLocation();
   const themeClass = theme === "light" ? "" : "dark_mode";
 
   const {
@@ -31,22 +32,24 @@ export function WidgetBar({ description, logo }) {
           <div className="row ml-0 mr-0">
             <div className="col-12 col-lg-6 align-self-center">
               <div className="d-flex justify-content-between">
-                <h1 className="logo">{logo}</h1>
+                {location.pathname === "/amp" ? (
+                  <>
+                    <h1>{logo}</h1>
+                  </>
+                ) : (
+                  <>
+                    <p className="logo">
+                      <a
+                        href="/amp"
+                        title={t("HEADER.logo_title")}
+                      >
+                        {logo}
+                      </a>
+                    </p>
+                  </>
+                )}
 
-                <div className="d-flex d-lg-none flex-column align-items-center">
-                  {/* <button
-                    type="button"
-                    className="open-mobile-menu menu-hamburger rounded-circle"
-                  >
-                    <span
-                      className="icon-AMA-Menu-Line"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">
-                      {t("HEADER.mobile_menu")} 
-                    </span>
-                  </button> */}
-                </div>
+                <div className="d-flex d-lg-none flex-column align-items-center"></div>
               </div>
             </div>
 
@@ -55,10 +58,9 @@ export function WidgetBar({ description, logo }) {
             <div className="d-flex flex-row gap-4 button-mobile">
               <button
                 className="btn btn-link dark-mode p-1 d-flex align-items-center"
-                // id="darkModeBtn"
                 onClick={toggleTheme}
               >
-                <span id="darkModeLabel">
+                <span id="darkModeLabel-mobile">
                   {theme === "light"
                     ? t("HEADER.light_mode")
                     : t("HEADER.dark_mode")}
@@ -71,10 +73,9 @@ export function WidgetBar({ description, logo }) {
 
               <button
                 className="btn btn-link language-mode p-1  d-flex align-items-center"
-                // id="langModeBtn"
                 onClick={toggleLanguage}
               >
-                <span id="langModeLabel">{t("HEADER.language_en")}</span>
+                <span id="langModeLabel-mobile">{t("HEADER.language_en")}</span>
                 <Icon name="AMA-Globo-Line icon-lang" aria-hidden="true" />
               </button>
             </div>

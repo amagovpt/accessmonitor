@@ -1,17 +1,30 @@
-import { Breadcrumb, Icon, Tabs } from "../../components";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Breadcrumb, Icon } from "../../components";
 
 import { getTestResults } from "../../services";
 import { useEffect, useState } from "react";
 import { TableDetails } from "./_components/TableDetails";
 import "./styles.css";
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../context/ThemeContext";
+import { useContext } from "react";
 
-export default function Details({ allData, ele }) {
-  const {t} = useTranslation()
+import { useParams, useNavigate } from "react-router-dom";
+
+export default function Details({ allData }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { details } = useParams();
+  const { theme } = useContext(ThemeContext);
+
+  const themeClass = theme === "light" ? "" : "dark_mode-details";
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const url = allData?.rawUrl;
-  // const textHeading = jsonPt.ELEMS[ele];
-  const textHeading = t(`ELEMS.${ele}`)
+  const textHeading = t(`ELEMS.${details}`);
   const [dataTable, setDataTable] = useState([]);
 
   const dataBreadCrumb = [
@@ -19,13 +32,10 @@ export default function Details({ allData, ele }) {
       title: "Acessibilidade.gov.pt",
       href: "/",
     },
+    { title: "Access Monitor", href: "/amp" },
     {
-      title: "Access Monitor",
-      href: "/",
-    },
-    {
-      title: url,
-      href: url,
+      title: url || "html",
+      href: "",
     },
 
     {
@@ -35,27 +45,13 @@ export default function Details({ allData, ele }) {
   ];
 
   function getDetails() {
-    const response = getTestResults(ele, allData);
+    const response = getTestResults(details, allData);
     setDataTable(response);
   }
 
   useEffect(() => {
     getDetails();
   }, []);
-
-  const detailsTabs = [
-    {
-      eventKey: "tab1",
-      title: "Elements",
-      component: (
-        <>
-          <div className="tabContent_container-details">
-            <TableDetails data={dataTable?.elements} />
-          </div>
-        </>
-      ),
-    },
-  ];
 
   let iconName;
 
@@ -79,21 +75,15 @@ export default function Details({ allData, ele }) {
 
   return (
     <>
-      <div className="container">
+      <div className={`container ${themeClass}`}>
         <div className="link_breadcrumb_container">
-          <Breadcrumb data={dataBreadCrumb} />
+          <Breadcrumb data={dataBreadCrumb} onClick={handleGoBack} />
         </div>
 
         <div className="report_container">
-          <div className="acess_monitor">AcessMonitor</div>
-
-          <h1 className="report_container_title url_content">
-            {dataTable?.finalUrl}
-          </h1>
-
-          <p className="report_container_subtitle test_result">
+          <h1 className="report_container_title url_content mb-5">
             {t("ELEMENT_RESULTS.subtitle")}
-          </p>
+          </h1>
         </div>
 
         <div className="bg-white show_details">
@@ -116,11 +106,10 @@ export default function Details({ allData, ele }) {
           </div>
         </div>
 
-        <Tabs
-          tabs={detailsTabs && detailsTabs}
-          defaultActiveKey="tab1"
-          vertical={false}
-        />
+        <div className="tabContent_container-details">
+          <TableDetails data={dataTable?.elements} />
+        </div>
+
       </div>
     </>
   );

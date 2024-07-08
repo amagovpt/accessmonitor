@@ -35,15 +35,13 @@ export default function Home({ changeState }) {
       title: "Acessibilidade.gov.pt",
       href: "/",
     },
-    {
-      title: "Access Monitor",
-      href: "/",
-    },
+    { title: "Access Monitor", href: "/amp" },
   ];
 
   const { theme } = useContext(ThemeContext);
   const main_content_home = theme === "light" ? "" : "main_content_home";
-  const imgUrl = theme === "light" ? "/img/verify.svg" : "/img/verify-dark.svg";
+  const imgUrl =
+    theme === "light" ? "/amp/img/verify.svg" : "/amp/img/verify-dark.svg";
 
   return (
     <>
@@ -56,19 +54,21 @@ export default function Home({ changeState }) {
           className={`bg-white validator_container ${main_content_home}`}
         >
           <div className="d-flex flex-column align-items-stretch left_container">
-            <p className="validator_container_description">
-              {t("HOME_PAGE.intro_text")}
-            </p>
+            <div className="d-flex flex-column mb-4">
+              <p className="validator_container_description">
+                {t("HOME_PAGE.intro_text")}
+              </p>
+
+              <p className="validator_container_description">
+                {t("HOME_PAGE.intro_text_content")}
+              </p>
+            </div>
 
             <Tabs tabs={tabs} defaultActiveKey="tab1" vertical={false} />
           </div>
 
           <div className="d-flex flex-row align-items-start right_container">
-            <img
-              src={imgUrl}
-              alt={t("HOME_PAGE.intro_img_text")}
-              className="verify_img"
-            />
+            <img src={imgUrl} className="verify_img" alt="" />
           </div>
         </section>
       </div>

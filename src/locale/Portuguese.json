@@ -3,6 +3,8 @@
     "HEADER": {
       "tool": "Uma ferramenta do ecossistema do",
       "logo_alt": "AccessMonitor - o validador de práticas de acessibilidade Web",
+      "header_arial_label": "Cabeçalho da página do AccessMonitor",
+      "logo_title": "ir para a página de entrada do AccessMonitor",
       "NAV": {
         "location": "Você está em",
         "ecosystem": "ecossistema",
@@ -52,13 +54,17 @@
           "link3": "Candidatura",
           "link4": "Declaração de acessibilidade e usabilidade",
           "link5": "Requisitos do Selo"
-        }
+        },
+        "youarehere": "você está aqui",
+        "open_dropdown": "pressione para comprimir a nossa lista de aplicações e sítios web",
+        "close_dropdown": "pressione para expandir a nossa lista de aplicações e sítios web"
       }
     },
     "HOME_PAGE": {
       "header": "Obtenha um relatório de acessibilidade através de um dos seguintes métodos",
-      "intro_text": "Aceda aqui ao nosso validador de práticas de acessibilidade Web (WCAG 2.1). Obtenha um relatório de acessibilidade através de um dos seguintes métodos:",
-      "intro_img_text": "imagem de verificação",
+      "intro_text": "A sua página Web é acessível?",
+      "intro_text_content": "Obtenha um relatório de acessibilidade através de um dos seguintes métodos:",
+      "intro_img_text": "imagem de verificação", 
       "tabs": {
         "url": "Inserir URL",
         "input": "Inserir código HTML",
@@ -70,12 +76,14 @@
       "html_label": "Insira o código HTML abaixo",
       "html_placeholder": "Inserir código HTML aqui",
       "file_label": "Escolher ficheiro",
+      "file_title": "Escolha um ficheiro HTML",
       "file_name_label": "Nome do ficheiro",
       "file_type_error": "Tipo de ficheiro inválido",
       "submit": "Validar",
       "messages": {
         "invalid_url": "O url inserido é inválido ou não existe"
-      }
+      },
+      "main_aria": "corpo principal da página do AccessMonitor"
     },
     "RESULTS": {
       "title": "Relatório de práticas de acessibilidade Web (WCAG 2.1 do W3C)",
@@ -83,7 +91,7 @@
       "actions": {
         "back": "Voltar",
         "re_evaluate": "Re-avaliar a página",
-        "download": "Descarregar dados",
+        "download": "Descarregar dados em CSV",
         "see_page": "Ver página",
         "pagecode": "Ver código da página",
         "open_webpage": "Abrir página web"
@@ -108,6 +116,9 @@
             "err": "Não aceitáveis",
             "warn": "Para ver manualmente"
           }
+        },
+        "gauge": {
+          "title": "Pontuação do AccessMonitor. Avaliação da página: {{value}} de 10"
         }
       },
       "results": {
@@ -137,7 +148,12 @@
         "alt_failed": "Prática não aceitável",
         "alt_warning": "Prática para ver manualmente",
         "alt_information": "pressione para mais informação",
-        "alt_more_information": "pressione para comprimir informação"
+        "alt_more_information": "pressione para comprimir informação",
+        "image_title": {
+          "AMA-Check-Line": "Prática aceitável",
+          "AMA-Wrong-Line": "Prática não aceitável",
+          "AMA-Middle-Line": "Prática para ver manualmente"
+        }
       },
       "scoreboard": {
         "level": "Nível",
@@ -146,7 +162,7 @@
       }
     },
     "ELEMENT_RESULTS": {
-      "subtitle": "Resultados do teste",
+      "subtitle": "Detalhes do teste",
       "elements_tab": "Elementos",
       "page_tab": "Página",
       "total_elements": "elementos encontrados",
@@ -163,7 +179,10 @@
         "line": "Linha:",
         "location": "Localização:",
         "property": "Propriedade:",
-        "value": "Valor:"
+        "value": "Valor:",
+        "caption": "Ocorrências encontradas desta prática",
+        "ocurrenceNumber": "Nº Ocorrência",
+        "ocurrenceDetail": "Detalhe da ocorrência"
       }
     },
     "CODE": {
@@ -187,7 +206,7 @@
       "options": "Opções de visualização",
       "glossary": "Glossário",
       "link": "Agência para a Modernização Administrativa, I.P.",
-      "rights": "Todos os Direitos Reservados."
+      "rights": " Todos os Direitos Reservados."
     },
     "LANGUAGES": {
       "Portuguese": "Português",

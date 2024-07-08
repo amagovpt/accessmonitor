@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { Button, Icon, TextArea } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 export function InsertHtml() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [htmlValue, setHtmlValue] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit() {
     try {
-      navigate("/resumo", { state: { content: htmlValue, type: "html" } });
+      const type = "html";
+      navigate(`/amp/results/${type}`, {
+        state: { contentHtml: htmlValue },
+      });
     } catch (error) {
       console.log("Erro", error);
     }
   }
 
   return (
-    <div className="tab_content_view">
+    <form className="tab_content_view" onSubmit={handleSubmit}>
       <TextArea
         id="html"
         label={t("HOME_PAGE.html_label")}
@@ -29,10 +32,11 @@ export function InsertHtml() {
       <Button
         text={t("HOME_PAGE.submit")}
         size="lg"
+        id="btn-html"
         disabled={htmlValue === ""}
-        onClick={handleSubmit}
+        type="submit"
         iconRight={<Icon name="AMA-Setalongaoficial-Line" />}
       />
-    </div>
+    </form>
   );
 }

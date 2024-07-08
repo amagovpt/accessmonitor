@@ -1,55 +1,78 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Icon } from "../../../components";
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useState } from "react";
 
-export function ButtonsActions({htmlValue, dataProcess, pageCode}) {
-  const {t} = useTranslation()
+export function ButtonsActions({
+  reRequest,
+  seeCode,
+  downloadCSV,
+  href,
+  themeClass,
+}) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const [seePage, setSeePage] = useState(false)
-  const [seeDownloads, setSeeDownloads] = useState(false)
-  
-  const openPageLinks = () => {
-    setSeePage(!seePage)
-    setSeeDownloads(false)
-  }
+  const [seePage, setSeePage] = useState(false);
 
-  const openDownloadLinks = () => {
-    setSeePage(false)
-    setSeeDownloads(!seeDownloads)
-  }
+  const openPageLinks = () => {
+    setSeePage(!seePage);
+  };
 
   return (
     <>
-      <div className="d-flex flex-row justify-content-between deskGroupMobile">
+      <div
+        className={`d-flex flex-row justify-content-between deskGroupMobile ${themeClass}`}
+      >
         <Button
           size="md"
           text={t("HEADER.evaluate_new_page")}
           iconRight={<Icon name="AMA-Setalongaoficial-Line" />}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/amp")}
         />
 
-        <div className="d-flex flex-row gap-3">
+        <div className="d-flex flex-row gap-3 other">
           <Button
             size="md"
             variant="secondary"
             text={t("RESULTS.actions.re_evaluate")}
             iconRight={<Icon name="AMA-Reload-Line" />}
-            onClick={() => navigate("/resumo", { state: { content: htmlValue, type: "html" } })}
+            onClick={() => reRequest()}
           />
 
           <div>
             <Button
+              id="dropdownMenuButton"
               size="md"
               variant="secondary"
               text={t("RESULTS.actions.see_page")}
-              iconRight={<Icon name="AMA-Code-Line" />}
+              iconRight={
+                <Icon
+                  name={seePage ? "AMA-SetaCima3-Line" : "AMA-SetaBaixo3-Line"}
+                />
+              }
               onClick={openPageLinks}
+              aria-expanded={seePage}
             />
-            {seePage && <div className="dropdown-content show_dropdown">
-              <a className="underline" onClick={() => navigate("/resumo/code", { state: { content: dataProcess, code: pageCode } })}>{t("RESULTS.actions.pagecode")}</a>
-              <a className="underline" target="_blank" href="https://www.google.pt/">{t("RESULTS.actions.open_webpage")}</a>
-            </div>}
+            {seePage && (
+              <u
+                className="dropdown-content show_dropdown"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <button onClick={() => seeCode()}>
+                    <span>{t("RESULTS.actions.pagecode")}</span>
+                    <Icon name="AMA-Code-Line" />
+                  </button>
+                </li>
+                <li>
+                  <a href={href} rel="noreferrer">
+                    <span>{t("RESULTS.actions.open_webpage")}</span>
+                    <Icon name="AMA-Externo-Line" />
+                  </a>
+                </li>
+              </u>
+            )}
           </div>
 
           <div>
@@ -58,37 +81,55 @@ export function ButtonsActions({htmlValue, dataProcess, pageCode}) {
               variant="secondary"
               text={t("RESULTS.actions.download")}
               iconRight={<Icon name="AMA-DownloadSetacurta-Line" />}
-              onClick={openDownloadLinks}
+              onClick={downloadCSV}
+              download="eval.csv"
             />
-            {seeDownloads && <div className="dropdown-content show_dropdown">
-              <a className="underline" download="eval.csv">CSV</a>
-              <a className="underline" download="eval.json">EARL</a>
-            </div>}
           </div>
         </div>
       </div>
 
-      <div className="group_mobile">
+      <div className={`group_mobile ${themeClass}`}>
         <div className="firstGroupContainer">
           <Button
             size="md"
             text={t("HEADER.evaluate_new_page")}
             iconRight={<Icon name="AMA-Setalongaoficial-Line" />}
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/amp")}
           />
 
           <div>
             <Button
+              id="dropdownMenuButton"
               size="md"
               variant="secondary"
               text={t("RESULTS.actions.see_page")}
-              iconRight={<Icon name="AMA-Code-Line" />}
+              iconRight={
+                <Icon
+                  name={seePage ? "AMA-SetaCima3-Line" : "AMA-SetaBaixo3-Line"}
+                />
+              }
               onClick={openPageLinks}
+              aria-expanded={seePage}
             />
-            {seePage && <div className="dropdown-content show_dropdown">
-              <a className="underline" onClick={() => navigate("/resumo/code", { state: { content: dataProcess, code: pageCode } })}>{t("RESULTS.actions.pagecode")}</a>
-              <a className="underline" target="_blank" href="https://www.google.pt/">{t("RESULTS.actions.open_webpage")}</a>
-            </div>}
+            {seePage && (
+              <u
+                className="dropdown-content show_dropdown"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <button onClick={() => seeCode()}>
+                    <span>{t("RESULTS.actions.pagecode")}</span>
+                    <Icon name="AMA-Code-Line" />
+                  </button>
+                </li>
+                <li>
+                  <a href={href} rel="noreferrer">
+                    <span>{t("RESULTS.actions.open_webpage")}</span>
+                    <Icon name="AMA-Externo-Line" />
+                  </a>
+                </li>
+              </u>
+            )}
           </div>
         </div>
 
@@ -98,7 +139,7 @@ export function ButtonsActions({htmlValue, dataProcess, pageCode}) {
             variant="secondary"
             text={t("RESULTS.actions.re_evaluate")}
             iconRight={<Icon name="AMA-Reload-Line" />}
-            onClick={() => navigate("/resumo", { state: { content: htmlValue, type: "html" } })}
+            onClick={() => reRequest()}
           />
 
           <div>
@@ -107,12 +148,9 @@ export function ButtonsActions({htmlValue, dataProcess, pageCode}) {
               variant="secondary"
               text={t("RESULTS.actions.download")}
               iconRight={<Icon name="AMA-DownloadSetacurta-Line" />}
-              onClick={openDownloadLinks}
+              onClick={downloadCSV}
+              download="eval.csv"
             />
-            {seeDownloads && <div className="dropdown-content show_dropdown">
-              <a className="underline" download="eval.csv">CSV</a>
-              <a className="underline" download="eval.json">EARL</a>
-            </div>}
           </div>
         </div>
       </div>

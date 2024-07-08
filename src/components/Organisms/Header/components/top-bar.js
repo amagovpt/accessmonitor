@@ -2,9 +2,7 @@ import "./top-bar.css";
 
 import { Icon, Link } from "../../../index";
 import { useContext, useRef, useState } from "react";
-
 import { ThemeContext } from "../../../../context/ThemeContext";
-
 import { useTranslation } from "react-i18next";
 
 export function TopBar() {
@@ -36,6 +34,12 @@ export function TopBar() {
     }
   };
 
+  const getTitle = () => {
+    return openAccordion
+      ? t("HEADER.DROPDOWN.open_dropdown")
+      : t("HEADER.DROPDOWN.close_dropdown");
+  };
+
   return (
     <>
       <div className={`top-bar ${themeClass}`}>
@@ -49,7 +53,7 @@ export function TopBar() {
                   onClick={toggleTheme}
                 >
                   <span id="darkModeLabel">
-                    {theme === "light"
+                    {theme !== "light"
                       ? t("HEADER.light_mode")
                       : t("HEADER.dark_mode")}
                   </span>
@@ -63,6 +67,7 @@ export function TopBar() {
                   className="btn btn-link language-mode p-1  d-flex align-items-center"
                   id="langModeBtn"
                   onClick={toggleLanguage}
+                  lang={language === "en" ? "pt-PT" : "en"}
                 >
                   <span id="langModeLabel">{t("HEADER.language_en")}</span>
                   <Icon name="AMA-Globo-Line icon-lang" aria-hidden="true" />
@@ -78,6 +83,7 @@ export function TopBar() {
                 onClick={toggleAccordion}
                 aria-expanded={openAccordion ? "true" : "false"}
                 id="accordionBtn"
+                title={getTitle()}
               >
                 <span
                   className="icon-AMA-MenuCimaGrande-Line icon-ed-menu-dots"

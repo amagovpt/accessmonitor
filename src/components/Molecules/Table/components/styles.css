@@ -48,6 +48,10 @@
   border-right: 1px solid #000;
 }
 
+.border_left {
+  border-left: 1px solid #000;
+}
+
 .aceptable_continer {
   display: flex;
   justify-content: space-between;
@@ -123,8 +127,11 @@
 .practices_found {
   font-size: 1.25em;
   font-weight: 700;
-  margin-left: 0.2em;
   font-family: var(--font-lato);
+}
+
+.number_found {
+  margin-right: 10px !important;
 }
 
 .mobile-row {
@@ -203,6 +210,10 @@
 
   .border_right {
     border-right: 0px;
+  }
+
+  .border_left {
+    border-left: 0px;
   }
 
   .ammount {

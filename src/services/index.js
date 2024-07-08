@@ -1,3 +1,5 @@
+/* eslint-disable no-array-constructor */
+
 import scs from "../lib/scs";
 import tests from "../lib/tests";
 import tests_colors from "../lib/tests_colors";
@@ -6,11 +8,8 @@ import { refWebsite, testView } from "../pages/Resume/utils";
 
 import { convertBytes } from "../utils/utils";
 
-// console.log("tot", tot);
-
 export function processData(tot) {
-  if (tot === null) {
-    console.log("Tot2xs", tot);
+  if (tot === null || tot === undefined) {
     return null;
   }
   const datax = {};
@@ -104,7 +103,7 @@ export function processData(tot) {
         result["prio"] = color === "ok" ? 3 : color === "err" ? 1 : 2;
 
         const scstmp = tests[test]["scs"].split(",");
-        // console.log("Sss", scstmp);
+
         for (let s in scstmp) {
           if (s) {
             const li = {};
@@ -142,7 +141,9 @@ export function getTestResults(test, data) {
 }
 
 export function getElements(allNodes, ele) {
-  const ead = processData(tot);
+  // const ead = processData(tot);
+
+  const dataTransform = processData(tot);
 
   if (ele === "form") {
     ele = "formSubmitNo";
@@ -151,10 +152,10 @@ export function getElements(allNodes, ele) {
   const elements = getElementsList(allNodes && allNodes[ele]);
 
   let result = "G";
-  const results = ead.results.map((r) => r.msg);
+  const results = dataTransform?.results.map((r) => r.msg);
   for (const test in tests || {}) {
     const _test = tests[test];
-    if (_test.test === ele && results.includes(test)) {
+    if (_test.test === ele && results?.includes(test)) {
       result = tests_colors[test];
       break;
     }
@@ -165,12 +166,11 @@ export function getElements(allNodes, ele) {
     result,
     elements,
     size: elements.length,
-    finalUrl: ead.metadata.url,
+    finalUrl: dataTransform?.metadata.url,
   };
 }
 
 export function getTagName(element) {
-  // console.log("El", element);
   let name = element.htmlCode.slice(1);
 
   let k = 0;
@@ -215,7 +215,6 @@ export function fixCode(code) {
 export function getElementsList(nodes) {
   const elements = new Array();
   for (const node of nodes || []) {
-    // console.log("ND", node);
     if (node.elements) {
       for (const element of node.elements || []) {
         const ele = getTagName(element);
