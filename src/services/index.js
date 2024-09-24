@@ -95,8 +95,11 @@ export function processData(tot, url) {
         result["ref"] = ref;
 
         result["ref_website"] = refWebsite(ref);
-        result["relation"] =
-          tests[test]["ref"].length > 3 ? "relationACT" : "relationT";
+        if (/^[A-Za-z]\d+$|^[A-Z]{4}\d+$/.test(tests[test]["ref"])) {
+          result["relation"] = "relationT"
+        } else {
+          result["relation"] = "relationACT"
+        }
         result["ref_related_sc"] = new Array();
         result["value"] = tnum;
         result["prio"] = color === "ok" ? 3 : color === "err" ? 1 : 2;
