@@ -187,7 +187,7 @@ export function getTagName(element) {
   return name;
 }
 
-export function fixCode(code, tot) {
+export function fixCode(code, tot, showCode) {
   code = code.replace(/_cssrules="true"/g, "");
   code = code.replace(/_documentselector="undefined"/g, "");
 
@@ -210,8 +210,7 @@ export function fixCode(code, tot) {
     code = code.replace(code.substring(index, k), "");
     index = code.indexOf('_selector="');
   }
-
-  return fixeSrcAttribute(code, tot);
+  return showCode ? removeImgStyles(code) : code;
 }
 
 export function getElementsList(nodes, tot) {
@@ -228,7 +227,7 @@ export function getElementsList(nodes, tot) {
               : ele === "title"
                 ? this.evaluation.processed.metadata.title
                 : fixCode(element.htmlCode, tot),
-          showCode: ele === "style" ? undefined : fixCode(element.htmlCode, tot),
+          showCode: ele === "style" ? undefined : fixCode(element.htmlCode, tot, true),
           pointer: element.pointer,
         });
       }
@@ -237,7 +236,7 @@ export function getElementsList(nodes, tot) {
       elements.push({
         ele,
         code: ele === "style" ? node.attributes : fixCode(node.htmlCode, tot),
-        showCode: ele === "style" ? undefined : fixCode(node.htmlCode, tot),
+        showCode: ele === "style" ? undefined : fixCode(node.htmlCode, tot, true),
         pointer: node.pointer,
       });
     }
@@ -305,4 +304,19 @@ function fixeSrcAttribute(code, tot) {
 
 function splice(code, idx, rem, str) {
   return code.slice(0, idx) + str + code.slice(idx + Math.abs(rem));
+}
+
+function removeImgStyles(code) {
+
+  let htmlString = code.replace(/<img[^>]*>/g, function(imgTag) {
+    // Remove style, width, and height attributes from the <img> tag
+    imgTag = imgTag.replace(/style="[^"]*"/g, '');  // Remove the style attribute
+    imgTag = imgTag.replace(/width="[^"]*"/g, '');  // Remove the width attribute
+    imgTag = imgTag.replace(/height="[^"]*"/g, ''); // Remove the height attribute
+
+    // Clean up any extra spaces that may be left behind
+    imgTag = imgTag.replace(/\s+/g, ' ').trim();
+    return imgTag;
+  });
+  return htmlString;
 }
