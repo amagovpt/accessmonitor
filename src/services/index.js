@@ -217,20 +217,18 @@ export function getElementsList(nodes, tot) {
   const elements = new Array();
   for (const node of nodes || []) {
     if (node.elements) {
-      for (const element of node.elements || []) {
-        const ele = getTagName(element);
-        elements.push({
-          ele,
-          code:
-            ele === "style"
-              ? element.attributes
-              : ele === "title"
-                ? this.evaluation.processed.metadata.title
-                : fixCode(element.htmlCode, tot),
-          showCode: ele === "style" ? undefined : fixCode(element.htmlCode, tot, true),
-          pointer: element.pointer,
-        });
-      }
+      const ele = getTagName(node.elements[0]);
+      elements.push({
+        ele,
+        code:
+          ele === "style"
+            ? node.elements[0].attributes
+            : ele === "title"
+              ? this.evaluation.processed.metadata.title
+              : fixCode(node.elements[0].htmlCode, tot),
+        showCode: ele === "style" ? undefined : fixCode(node.elements[0].htmlCode, tot, true),
+        pointer: node.elements[0].pointer,
+      });
     } else {
       const ele = getTagName(node);
       elements.push({

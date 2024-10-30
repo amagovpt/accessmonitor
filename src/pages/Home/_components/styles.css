@@ -32,6 +32,10 @@
   display: none;
 } */
 
+.field .input-group .form-control {
+  margin: 0;
+}
+
 input[type=file] {
   margin-bottom: 0px;
   padding-left: 0px;

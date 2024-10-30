@@ -130,7 +130,6 @@ export default function Resume({ setAllData, setEle }) {
     if (type === "") {
       const content = "html";
       if(ele.startsWith('http://') || ele.startsWith('https://')) {
-        console.log("é URL")
         window.open(ele, '_blank');
       } else {
         navigate(`${pathURL}results/${content}/${ele}`, {
@@ -141,7 +140,6 @@ export default function Resume({ setAllData, setEle }) {
       }
     } else {
       if(ele.startsWith('http://') || ele.startsWith('https://')) {
-        console.log("é URL")
         window.open(ele, '_blank');
       } else {
         const encodedURL = encodeURIComponent(allData?.rawUrl);
