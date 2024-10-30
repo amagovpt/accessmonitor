@@ -195,7 +195,12 @@ export default function Resume({ setAllData, setEle }) {
             <h2>{t("RESULTS.summary.title")}</h2>
             <div className="d-flex flex-row mt-5 mb-5 justify-content-between container_uri_chart">
               <div className="chart_container">
-                <Gauge percentage={scoreDataFormatted} darkTheme={theme} title={t("RESULTS.summary.score")}  />
+                <Gauge
+                  percentage={scoreDataFormatted}
+                  darkTheme={theme}
+                  title={[t("RESULTS.summary.score")]}
+                  screenReaderTitle={t("RESULTS.summary.gauge.title", {value: scoreDataFormatted})}
+                />
               </div>
               <div className="resume_info_about_uri d-flex flex-column gap-4">
                 <div className="d-flex flex-column">
