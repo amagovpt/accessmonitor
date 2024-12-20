@@ -35,6 +35,10 @@
   }
 }
 
-.img img {
+.big-width img {
   width: 100%;
+}
+
+.big-width title {
+  display: flex;
 }
