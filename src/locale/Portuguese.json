@@ -750,7 +750,7 @@
       },
       "heading_04": {
         "s": "Identifiquei <mark>{{value}}</mark> cabeçalhos de nível 1. Devia haver um.",
-        "p": "Identifiquei <mark>{{value}}</mark> cabeçalhos de nível 1. Devia haver apenas um."
+        "p": "Identifiquei <mark>{{value}}</mark> cabeçalhos de nível 1. Devia haver um."
       },
       "aria_01": {
         "s": "Verifiquei que <mark>todos os elementos</mark> com papel semântico definido explicitamente estão dentro dos contextos obrigatórios.",

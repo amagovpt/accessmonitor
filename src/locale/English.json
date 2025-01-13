@@ -751,7 +751,7 @@
       },
       "heading_04": {
         "s": "I have identified <mark>{{value}}</mark> level 1 headings. There should be one.",
-        "p": "I have identified <mark>{{value}}</mark> level 1 headings. There should be only one."
+        "p": "I have identified <mark>{{value}}</mark> level 1 headings. There should be one."
       },
       "aria_01": {
         "s": "I noticed that <mark>all elements</mark> with an explicit semantic role exist inside their required contexts.",
