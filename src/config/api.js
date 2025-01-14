@@ -11,8 +11,8 @@ export const api = axios.create({
 });
 
 export const getEvalData = async (content, currentURL) => {
-  //const response = await getEvalDataByAPI(content, currentURL);
-  const response = await getEvalDataByLocal(content, currentURL);
+  const response = await getEvalDataByAPI(content, currentURL);
+  //const response = await getEvalDataByLocal(content, currentURL);
 
   return response;
 }
