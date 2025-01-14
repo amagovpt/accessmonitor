@@ -1051,7 +1051,7 @@ export default {
     scs: "1.3.1",
     dis: "43353",
     result: "failed",
-  }, 
+  },  
   aria_01: {
     type: "true",
     elem: "all",
